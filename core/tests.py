@@ -23,7 +23,11 @@ def passive_tests(url, headers):
 
 
 def active_tests(url, root, scheme, header_dict, delay):
-    headers = requester(url, scheme, header_dict, 'example.com')
+    try:
+        headers = requester(url, scheme, header_dict, 'example.com')
+    except:
+        print (url + ' request error!')
+        headers = False
     if headers:
         acao_header, acac_header = headers['access-control-allow-origin'], headers.get('access-control-allow-credentials', None)
         if acao_header and acao_header == (scheme + 'example.com'):
